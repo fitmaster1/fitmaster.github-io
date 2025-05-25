@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fit Master | Login & Cadastro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: #ffd1d5;
+      color: #e14940;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-container {
+      background: #fff0f1;
+      border: 1px solid #e14940;
+      border-radius: 16px;
+      padding: 40px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 0 20px rgba(225, 73, 64, 0.3);
+      box-sizing: border-box;
+    }
+
+    .login-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      color: #e14940;
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    .login-title strong {
+      color: #e14940;
+      display: block;
+      margin-top: 6px;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+      color: #e14940;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #e14940;
+      background: #fff0f1;
+      color: #e14940;
+      font-weight: 500;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    .input-group input::placeholder {
+      color: #e14940cc;
+    }
+
+    .login-button {
+      width: 100%;
+      padding: 12px;
+      background: #e14940; /* cor do título */
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    .login-button:hover {
+      background: #b73632; /* vermelho mais escuro no hover */
+      color: #fff;
+    }
+
+    .forgot-password {
+      text-align: center;
+      margin: 12px 0 20px 0;
+      font-size: 0.9rem;
+      color: #e14940; /* mesma cor do título */
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .forgot-password:hover {
+      text-decoration: underline;
+    }
+
+    .divider {
+      text-align: center;
+      margin: 24px 0;
+      color: #e14940cc;
+      position: relative;
+      font-weight: 600;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 40%;
+      height: 1px;
+      background: #e14940cc;
+    }
+
+    .divider::before {
+      left: 0;
+    }
+
+    .divider::after {
+      right: 0;
+    }
+
+    .social-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .social-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      background: #e14940; /* mesma cor do título */
+      color: #fff;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.3s;
+      box-sizing: border-box;
+    }
+
+    .social-button:hover {
+      background: #b73632; /* vermelho escuro no hover */
+    }
+
+    .social-icon {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
+      color: #fff;
+      display: block;
+    }
+
+    .footer-text {
+      margin-top: 20px;
+      font-size: 0.8rem;
+      text-align: center;
+      color: #e14940cc;
+      box-sizing: border-box;
+    }
+
+    .mensagem {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 0.9rem;
+      padding: 10px;
+      border-radius: 8px;
+      display: none;
+      box-sizing: border-box;
+    }
+
+    .success {
+      background: #ffe0e0;
+      color: #b43430;
+    }
+
+    .error {
+      background: #ffe0e0;
+      color: #b43430;
+    }
+
+    .switch-link {
+      color: #e14940cc;
+      text-align: center;
+      margin-top: 12px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      box-sizing: border-box;
+    }
+
+    .switch-link:hover {
+      color: #e14940;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 420px) {
+      .login-container {
+        padding: 20px;
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-title" id="form-title">
+      Entre no Fit Master<br />
+      <strong>e supere seus limites.</strong>
+    </div>
+
+    <form id="formulario" onsubmit="event.preventDefault(); handleSubmit();">
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="seu@email.com" required />
+      </div>
+      <div class="input-group">
+        <label for="password">Senha</label>
+        <input type="password" id="password" placeholder="••••••••" required />
+      </div>
+
+      <button class="login-button" type="submit" id="submit-button">Entrar</button>
+
+      <div class="forgot-password" id="forgot-password" onclick="recuperarSenha()" style="display: block;">
+        Esqueceu a senha?
+      </div>
+
+      <div id="mensagem" class="mensagem"></div>
+    </form>
+
+    <div class="switch-link" onclick="alternarModo()">
+      Não tem uma conta? <strong>Criar conta</strong>
+    </div>
+
+    <div class="divider">ou</div>
+
+    <div class="social-buttons" id="social-buttons">
+      <button class="social-button" onclick="loginSocial('Google')">
+        <svg
+          class="social-icon"
+          viewBox="0 0 533.5 544.3"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill="#fff"
+            d="M533.5 278.4c0-18.4-1.5-36-4.3-53.3H272v100.9h146.9c-6.3 33.6-25.6 62.1-54.5 81v67.2h87.9c51.4-47.3 81.2-117 81.2-195.8z"
+          />
+          <path
+            fill="#fff"
+            d="M272 544.3c73.5 0 135.3-24.3 180.3-65.9l-87.9-67.2c-24.5 16.4-56 26-92.4 26-70.9 0-131-47.9-152.5-112.1H28.3v70.4c44.7 88.7 136.8 148.8 243.7 148.8z"
+          />
+          <path
+            fill="#fff"
+            d="M119.5 323.1c-10.8-32-10.8-66.5 0-98.5v-70.4H28.3c-40.4 79.1-40.4 174.4 0 253.5l91.2-70.4z"
+          />
+          <path
+            fill="#fff"
+            d="M272 107.7c38.9-.6 76.2 14.4 104.7 41.5l78.6-78.6C406.7 22.1 343.6-.2 272 0 164.9 0 72.8 60.1 28.3 148.8l91.2 70.4c21.5-64.2 81.6-112.1 152.5-112.1z"
+          />
+        </svg>
+        Google
+      </button>
+
+      <button class="social-button" onclick="loginSocial('Facebook')">
+        <svg
+          class="social-icon"
+          viewBox="0 0 320 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill="currentColor"
+            d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06H293V6.26S259.29 0 225.36 0c-73.14 0-121.09 44.38-121.09 124.72v70.62H22.89V288h81.38v224h100.17V288z"
+          />
+        </svg>
+        Facebook
+      </button>
+
+      <button class="social-button" onclick="loginSocial('Apple')">
+        <svg
+          class="social-icon"
+          viewBox="0 0 384 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill="currentColor"
+            d="M318.7 268.1c-.4-36.9 31-54.7 32.3-55.6-17.7-25.9-45.1-29.5-54.8-29.9-23.3-2.4-45.5 13.7-57.4 13.7-11.9 0-30.3-13.3-49.9-13-25.6.3-49.2 15-62.4 38.1-26.8 46.6-6.9 115.5 19.3 153.3 12.8 20.2 27.9 42.9 47.7 42 19-.8 26.1-12.3 48.9-12.3 22.8 0 29.4 12.3 49.5 11.9 20.3-.4 33-20.5 45.3-40.9 14.3-23.3 20.2-45.9 20.4-47.1-.5-.2-39.1-15-39.5-59.1zM264 82c10.9-13.2 18.3-31.5 16.3-49.7-15.7.6-34.7 10.5-45.9 23.7-10.1 11.5-19 30.1-16.6 47.7 17.6 1.4 35.7-8.9 46.2-21.7z"
+          />
+        </svg>
+        Apple
+      </button>
+    </div>
+
+    <div class="footer-text">
+      © Fit Master 2025. Todos os direitos reservados.
+    </div>
+  </div>
+
+  <script>
+    const formTitle = document.getElementById('form-title');
+    const forgotPassword = document.getElementById('forgot-password');
+    const submitButton = document.getElementById('submit-button');
+    const switchLink = document.querySelector('.switch-link');
+    const mensagem = document.getElementById('mensagem');
+    let modoLogin = true;
+
+    function alternarModo() {
+      if (modoLogin) {
+        modoLogin = false;
+        formTitle.innerHTML = 'Crie sua conta<br><strong>e alcance o melhor shape.</strong>';
+        submitButton.textContent = 'Cadastrar';
+        forgotPassword.style.display = 'none';
+        switchLink.innerHTML = 'Já tem uma conta? <strong>Entrar</strong>';
+      } else {
+        modoLogin = true;
+        formTitle.innerHTML = 'Entre no Fit Master<br><strong>e supere seus limites.</strong>';
+        submitButton.textContent = 'Entrar';
+        forgotPassword.style.display = 'block';
+        switchLink.innerHTML = 'Não tem uma conta? <strong>Criar conta</strong>';
+      }
+      mensagem.style.display = 'none';
+      limparCampos();
+    }
+
+    function limparCampos() {
+      document.getElementById('email').value = '';
+      document.getElementById('password').value = '';
+    }
+
+    function recuperarSenha() {
+      const email = document.getElementById('email').value.trim();
+      if (!email) {
+        mensagem.textContent = 'Por favor, informe seu email para recuperar a senha.';
+        mensagem.className = 'mensagem error';
+        mensagem.style.display = 'block';
+        return;
+      }
+      mensagem.textContent = `Link de recuperação enviado para ${email}. Verifique seu email.`;
+      mensagem.className = 'mensagem success';
+      mensagem.style.display = 'block';
+    }
+
+    function handleSubmit() {
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if (!email || !password) {
+        mensagem.textContent = 'Preencha todos os campos.';
+        mensagem.className = 'mensagem error';
+        mensagem.style.display = 'block';
+        return;
+      }
+
+      if (modoLogin) {
+        // Simulação de login
+        mensagem.textContent = `Bem-vindo, ${email}! Você entrou com sucesso.`;
+        mensagem.className = 'mensagem success';
+        mensagem.style.display = 'block';
+      } else {
+        // Simulação de cadastro
+        mensagem.textContent = `Conta criada com sucesso para ${email}! Faça login para continuar.`;
+        mensagem.className = 'mensagem success';
+        mensagem.style.display = 'block';
+        setTimeout(() => {
+          alternarModo();
+        }, 2000);
+      }
+      limparCampos();
+    }
+
+    function loginSocial(rede) {
+      mensagem.textContent = `Login com ${rede} selecionado (simulado).`;
+      mensagem.className = 'mensagem success';
+      mensagem.style.display = 'block';
+    }
+  </script>
+</body>
+</html>
